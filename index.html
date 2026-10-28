@@ -164,11 +164,11 @@
     width: 100%;
     padding: 18px 16px;
     border-radius: 14px;
-    background: linear-gradient(180deg, #d43cff 0%, #b400ff 45%, #ae00ff 100%);
+    background: linear-gradient(180deg, #d43cff 0%, #b400ff 45%, #8a00cc 100%);
     color: #fff;
     font-size: 16px;
-    font-weight: 800;
-    letter-spacing: 0.5px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
     text-align: center;
     text-transform: uppercase;
     text-decoration: none;
@@ -176,17 +176,16 @@
     cursor: pointer;
     position: relative;
     box-shadow:
-      0 6px 0 #6b0099,
-      0 10px 20px rgba(0,0,0,0.5),
-      inset 0 2px 0 rgba(255,255,255,0.35),
+      0 8px 0 #6b0099,
+      0 12px 24px rgba(0,0,0,0.55),
+      inset 0 2px 0 rgba(255,255,255,0.4),
       inset 0 -3px 8px rgba(0,0,0,0.25);
     transform: translateY(0);
     transition: transform 0.08s ease, box-shadow 0.08s ease;
-    animation: none;
   }
   .btn-vip:active,
   .btn-vip.pressed {
-    transform: translateY(6px);
+    transform: translateY(8px);
     box-shadow:
       0 0 0 #6b0099,
       0 3px 8px rgba(0,0,0,0.4),
@@ -198,8 +197,8 @@
     content: '';
     position: absolute;
     top: 3px; left: 10px; right: 10px;
-    height: 40%;
-    background: linear-gradient(180deg, rgba(255,255,255,0.35), transparent);
+    height: 42%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.45), transparent);
     border-radius: 10px 10px 50% 50% / 10px 10px 100% 100%;
     pointer-events: none;
   }
@@ -211,31 +210,42 @@
     margin-top: 14px;
     padding: 16px;
     border-radius: 14px;
-    background: linear-gradient(180deg, #00b106 0%, #00d607 50%, #00b106 100%);
-    border: 1px solid rgba(255,255,255,0.15);
+    background: linear-gradient(180deg, #25d366 0%, #1ebe5a 50%, #128c7e 100%);
+    border: 1px solid rgba(255,255,255,0.2);
     color: #fff;
     font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
+    font-weight: 900;
+    letter-spacing: 1px;
     text-transform: uppercase;
     cursor: pointer;
     text-decoration: none;
     text-align: center;
     position: relative;
     box-shadow:
-      0 5px 0 #0d0d12,
-      0 8px 16px rgba(0,0,0,0.5),
-      inset 0 1px 0 rgba(255,255,255,0.15);
+      0 6px 0 #075e54,
+      0 10px 20px rgba(0,0,0,0.5),
+      inset 0 2px 0 rgba(255,255,255,0.35),
+      inset 0 -2px 6px rgba(0,0,0,0.2);
     transform: translateY(0);
     transition: transform 0.08s ease, box-shadow 0.08s ease;
   }
   .btn-chat:active,
   .btn-chat.pressed {
-    transform: translateY(5px);
+    transform: translateY(6px);
     box-shadow:
-      0 0 0 #0d0d12,
+      0 0 0 #075e54,
       0 2px 6px rgba(0,0,0,0.4),
-      inset 0 1px 0 rgba(255,255,255,0.1);
+      inset 0 2px 0 rgba(255,255,255,0.2),
+      inset 0 -2px 6px rgba(0,0,0,0.3);
+  }
+  .btn-chat::before {
+    content: '';
+    position: absolute;
+    top: 3px; left: 10px; right: 10px;
+    height: 40%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.3), transparent);
+    border-radius: 10px 10px 50% 50% / 10px 10px 100% 100%;
+    pointer-events: none;
   }
 
   @media (max-height: 600px) {
