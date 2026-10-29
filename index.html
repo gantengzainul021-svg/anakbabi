@@ -126,7 +126,7 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ===== SIDE ACTIONS — turun biar gak ketutupan banner ===== */
+  /* ===== SIDE ACTIONS ===== */
   .side-actions {
     position: fixed; right: 14px; bottom: 90px; z-index: 9;
     display: flex; flex-direction: column; gap: 14px; align-items: center;
@@ -145,7 +145,7 @@
   }
   .action .heart { color: #ff2d55; }
 
-  /* ===== CENTER BANNER — lebih ramping ===== */
+  /* ===== CENTER BANNER ===== */
   .center-actions {
     position: fixed; top: 42%; left: 50%;
     transform: translate(-50%, -50%);
@@ -176,7 +176,7 @@
   }
   .notice-center strong { color: #ff2d55; }
 
-  /* Tombol VIP — kecil, 3D */
+  /* Tombol VIP */
   .btn-vip {
     display: block;
     width: 100%;
@@ -193,34 +193,18 @@
     border: none;
     cursor: pointer;
     position: relative;
-    box-shadow:
-      0 4px 0 #6b0099,
-      0 6px 12px rgba(0,0,0,0.5),
-      inset 0 1px 0 rgba(255,255,255,0.35),
-      inset 0 -2px 6px rgba(0,0,0,0.25);
+    box-shadow: 0 4px 0 #6b0099, 0 6px 12px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -2px 6px rgba(0,0,0,0.25);
     transform: translateY(0);
     transition: transform 0.08s ease, box-shadow 0.08s ease;
   }
-  .btn-vip:active,
-  .btn-vip.pressed {
-    transform: translateY(4px);
-    box-shadow:
-      0 0 0 #6b0099,
-      0 2px 6px rgba(0,0,0,0.4),
-      inset 0 1px 0 rgba(255,255,255,0.2),
-      inset 0 -1px 4px rgba(0,0,0,0.35);
-  }
+  .btn-vip:active { transform: translateY(4px); box-shadow: 0 0 0 #6b0099, 0 2px 6px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.2), inset 0 -1px 4px rgba(0,0,0,0.35); }
   .btn-vip::before {
-    content: '';
-    position: absolute;
-    top: 2px; left: 8px; right: 8px;
-    height: 40%;
+    content: ''; position: absolute; top: 2px; left: 8px; right: 8px; height: 40%;
     background: linear-gradient(180deg, rgba(255,255,255,0.35), transparent);
-    border-radius: 8px 8px 50% 50% / 8px 8px 100% 100%;
-    pointer-events: none;
+    border-radius: 8px 8px 50% 50% / 8px 8px 100% 100%; pointer-events: none;
   }
 
-  /* Tombol Chat — kecil, 3D */
+  /* Tombol Chat */
   .btn-chat {
     display: block;
     width: 100%;
@@ -237,30 +221,22 @@
     text-decoration: none;
     text-align: center;
     position: relative;
-    box-shadow:
-      0 3px 0 #0d0d12,
-      0 5px 10px rgba(0,0,0,0.5),
-      inset 0 1px 0 rgba(255,255,255,0.15);
+    box-shadow: 0 3px 0 #0d0d12, 0 5px 10px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.15);
     transform: translateY(0);
     transition: transform 0.08s ease, box-shadow 0.08s ease;
   }
-  .btn-chat:active,
-  .btn-chat.pressed {
-    transform: translateY(3px);
-    box-shadow:
-      0 0 0 #0d0d12,
-      0 2px 4px rgba(0,0,0,0.4),
-      inset 0 1px 0 rgba(255,255,255,0.1);
-  }
+  .btn-chat:active { transform: translateY(3px); box-shadow: 0 0 0 #0d0d12, 0 2px 4px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1); }
 
-  /* ===== BOTTOM COMMENT BOX ===== */
+  /* ===== BOTTOM COMMENT BOX (ANTI KETUTUPAN KEYBOARD) ===== */
   .bottom-area {
-    position: fixed; bottom: 0; left: 0; right: 0; z-index: 15;
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 99;
     padding: 10px 12px;
     padding-bottom: max(10px, env(safe-area-inset-bottom));
     background: linear-gradient(to top, rgba(0,0,0,0.92), rgba(0,0,0,0.6) 60%, transparent);
     display: flex; flex-direction: column; align-items: center;
+    transition: bottom 0.2s ease; /* Transisi biar mulus pas naik */
   }
+  
   .comment-box {
     display: flex; gap: 6px; width: 100%; max-width: 480px;
   }
@@ -288,6 +264,18 @@
   }
   .comment-box button:active { transform: translateY(3px); box-shadow: 0 0 0 #8a0028; }
 
+  /* Class bantuan saat keyboard aktif */
+  body.keyboard-open .bottom-area {
+    bottom: 300px; /* Naik ke atas keyboard */
+    background: transparent;
+  }
+  body.keyboard-open .center-actions {
+    opacity: 0; pointer-events: none; /* Sembunyikan banner tengah biar fokus ngetik */
+  }
+  body.keyboard-open .side-actions {
+    opacity: 0; pointer-events: none; /* Sembunyikan tombol like */
+  }
+
   @media (max-height: 600px) {
     .comments { bottom: 120px; }
     .side-actions { bottom: 70px; gap: 10px; }
@@ -314,9 +302,7 @@
 
 <h1 class="sr-only">Private Live Stream — Join VIP</h1>
 
-<video class="video-bg" id="bgVideo" autoplay muted loop playsinline aria-hidden="true"
-       poster="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1080">
-</video>
+<video class="video-bg" id="bgVideo" autoplay muted loop playsinline aria-hidden="true"></video>
 
 <div class="overlay"></div>
 
@@ -383,6 +369,19 @@
   // Pasang link ke tombol
   document.getElementById('vipBtn').href = SHINZY_CONFIG.CPA_LINK;
   document.getElementById('chatBtn').href = SHINZY_CONFIG.CHAT_LINK;
+
+  /* ===== TRIK ANTI-KEYBOARD HP ===== */
+  const inputKomentar = document.getElementById('commentInput');
+  // Saat kolom komentar diklik (keyboard muncul)
+  inputKomentar.addEventListener('focus', () => {
+    document.body.classList.add('keyboard-open');
+    // Scroll ke paling bawah biar form kelihatan
+    setTimeout(() => { window.scrollTo(0, document.body.scrollHeight); }, 100);
+  });
+  // Saat kolom komentar ditutup (keyboard hilang)
+  inputKomentar.addEventListener('blur', () => {
+    document.body.classList.remove('keyboard-open');
+  });
 
   /* ===== I18N ===== */
   const SHINZY_I18N = {
